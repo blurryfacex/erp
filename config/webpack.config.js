@@ -88,11 +88,13 @@ module.exports = function(webpackEnv) {
       },
     ].filter(Boolean);
     if (preProcessor) {
+      const options = preProcessor !== 'less-loader'
+      ? {sourceMap: isEnvProduction && shouldUseSourceMap,}
+      : {javascriptEnabled: true}
+
       loaders.push({
         loader: require.resolve(preProcessor),
-        options: {
-          sourceMap: isEnvProduction && shouldUseSourceMap,
-        },
+        options: options,
       });
     }
     return loaders;
@@ -167,7 +169,7 @@ module.exports = function(webpackEnv) {
                 }
               : false,
           },
-        }),
+        })
       ],
       splitChunks: {
         chunks: 'all',
@@ -253,9 +255,6 @@ module.exports = function(webpackEnv) {
               exclude: /@babel(?:\/|\\{1,2})runtime/,
               loader: require.resolve('babel-loader'),
               options: {
-                plugins: [
-                  ['import', { libraryName: "antd", style: true }],
-                ],
                 babelrc: true,
                 configFile: false,
                 compact: true,
