@@ -1,3 +1,6 @@
+@import './default.less';
+@import './loading.less';
+
 .container {
   display: flex;
   .nav-left {
@@ -8,9 +11,9 @@
     height: calc(100vh);
   }
   .main {
-    flex: 1;
     background-color: #d6d6d6;
     height: calc(100vh);
+    overflow: auto;
   }
   .content {
     position: relative;
