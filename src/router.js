@@ -6,6 +6,7 @@ import Login from './pages/login'
 import NoMatch from './pages/nomatch'
 import table from './pages/table/basicTable'
 import Button from './pages/ui/button'
+import Common from "./common"
 
 export default class Router extends React.Component {
   render () {
@@ -20,7 +21,11 @@ export default class Router extends React.Component {
               <Route component={NoMatch} />
             </Admin>
           } />
-          <Route path="/order/detail" comasponent={Login} />
+          <Route path="/common" render={ () =>
+            <Common>
+              <Route path="/common/order/detail/:orderId" component={table} />
+            </Common>
+          } />
         </App>
       </HashRouter>
     )
